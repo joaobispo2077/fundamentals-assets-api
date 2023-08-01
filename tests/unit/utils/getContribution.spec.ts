@@ -1,7 +1,10 @@
-import { Asset, getPoundedContribution } from "@src/utils/getPoundedContribution";
+import {
+  Asset,
+  getPoundedContribution,
+} from '@src/utils/getPoundedContribution';
 
-describe("getContribution", () => {
-  it("should be able to calculate contribution per asset using 3 assets for SCHH", () => {
+describe('getContribution', () => {
+  it('should be able to calculate contribution per asset using 3 assets for SCHH', () => {
     const assets: Asset[] = [
       {
         ticker: 'IJR',
@@ -18,9 +21,16 @@ describe("getContribution", () => {
     ];
 
     const totalContribution = 100;
-    const sumAllStockGrades = assets.reduce((acc, asset) => acc + asset.grade, 0);
+    const sumAllStockGrades = assets.reduce(
+      (acc, asset) => acc + asset.grade,
+      0,
+    );
 
-    const contributionForSchh = getPoundedContribution(assets[1], totalContribution, sumAllStockGrades)
+    const contributionForSchh = getPoundedContribution(
+      assets[1],
+      totalContribution,
+      sumAllStockGrades,
+    );
 
     expect(contributionForSchh).toBe(80);
   });
