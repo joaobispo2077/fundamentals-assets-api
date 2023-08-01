@@ -1,0 +1,27 @@
+{
+  "name": "fundamentals-assets-api",
+  "version": "1.0.0",
+  "description": "API to manage asset allocation by weights",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaobispo2077/fundamentals-assets-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "fundamentals",
+    "assets",
+    "clean",
+    "architecture"
+  ],
+  "author": "João Bispo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joaobispo2077/fundamentals-assets-api/issues"
+  },
+  "homepage": "https://github.com/joaobispo2077/fundamentals-assets-api#readme"
+}
