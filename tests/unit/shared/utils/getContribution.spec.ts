@@ -1,7 +1,7 @@
 import {
 	Asset,
 	getPoundedContribution,
-} from '@src/utils/getPoundedContribution';
+} from '@src/shared/utils/getPoundedContribution';
 
 describe('getContribution', () => {
 	it('should be able to calculate contribution per asset using 3 assets for SCHH', () => {
