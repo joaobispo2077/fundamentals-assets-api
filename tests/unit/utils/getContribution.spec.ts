@@ -34,7 +34,7 @@ describe('getContribution', () => {
 
 		expect(contributionForSchh).toBe(80);
 	});
-	it('should be able to calculate contribution per asset using 2 assets', () => {
+	it('should be able to calculate contribution per asset using 2 assets for IJR/VNQI', () => {
 		const assets: Asset[] = [
 			{
 				ticker: 'IJR',
