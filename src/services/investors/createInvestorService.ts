@@ -1,3 +1,4 @@
+import { configs } from '@src/configs';
 import { InvestorsRepository } from '@src/repositories/interfaces/InvestorsRepository';
 import { AlreadyExistsError } from '@src/shared/errors/AlreadyExistsError';
 import { hash } from 'bcryptjs';
@@ -7,7 +8,7 @@ export type CreateInvestorServiceRequest = {
 	password: string;
 };
 
-export const SALT_ROUND = 12;
+const { SALT_ROUND } = configs;
 
 export class CreateInvestorService {
 	constructor(private readonly investorsRepository: InvestorsRepository) {}
