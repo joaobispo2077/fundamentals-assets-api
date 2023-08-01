@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { z } from 'zod';
 
 const configSchema = z.object({
+	SWAGGER_HOST: z.string().default('localhost:3333'),
 	SALT_ROUND: z.coerce.number().default(12),
 	PORT: z.coerce.number().default(3333),
 	NODE_ENV: z
