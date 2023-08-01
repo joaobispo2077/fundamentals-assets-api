@@ -1,6 +1,10 @@
 name: Reinforce Code Standards
 
-on: [push]
+on:
+	push:
+		branches:
+			- main
+			- develop
 
 jobs:
   reinforce-code-standards:
