@@ -10,6 +10,7 @@ import pkg from '../package.json';
 import { setupRoutes } from './routes';
 import fastifyJwt from '@fastify/jwt';
 import fastifyCookie from '@fastify/cookie';
+import { logger } from './shared/utils/logger';
 
 const app = fastify({
 	logger: true,
@@ -51,7 +52,6 @@ app.register(fastifySwaggerUi, swaggerUiOptions);
 app.register(setupRoutes);
 
 app.setErrorHandler((error, _request, reply) => {
-	console.error(error);
 	if (error instanceof ZodError) {
 		return reply
 			.status(422)
@@ -63,10 +63,14 @@ app.setErrorHandler((error, _request, reply) => {
 	}
 
 	if (configs.NODE_ENV !== 'production') {
-		console.error(error);
+		logger.error({
+			message: `Internal server error: ${error.message}`,
+		});
 	} else {
 		// TODO: Here we should log to an external tool like DataDog/NewRelic/Sentry
-		console.error(error);
+		logger.error({
+			message: `Internal server error: ${error.message}`,
+		});
 	}
 
 	return reply.status(500).send({ message: 'Internal server error' });

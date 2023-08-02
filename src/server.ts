@@ -1,5 +1,6 @@
 import { app } from './app';
 import { configs } from './configs';
+import { logger } from './shared/utils/logger';
 
 app
 	.listen({
@@ -7,5 +8,7 @@ app
 		port: configs.PORT,
 	})
 	.then((address) => {
-		console.log(`Server is running at ${address}`);
+		logger.info({
+			message: `Server listening on ${address}`,
+		});
 	});

@@ -14,6 +14,7 @@ const configSchema = z.object({
 	NODE_ENV: z
 		.enum(['development', 'test', 'production'])
 		.default('development'),
+	LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('debug'),
 });
 
 const _configs = configSchema.safeParse(process.env);

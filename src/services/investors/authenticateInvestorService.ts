@@ -11,13 +11,9 @@ export class AuthenticateInvestorService {
 	constructor(private readonly investorsRepository: InvestorsRepository) {}
 
 	async execute({ email, password }: CreateInvestorServiceRequest) {
-		console.error(email);
 		const investor = await this.investorsRepository.findByEmail(email);
 
 		if (!investor) {
-			console.error(investor);
-			console.error('here');
-			console.error('here');
 			throw new InvalidCredentialsAuthenticationError();
 		}
 
