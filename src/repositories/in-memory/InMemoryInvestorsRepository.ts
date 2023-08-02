@@ -9,9 +9,10 @@ export class InMemoryInvestorsRepository implements InvestorsRepository {
 	private investors: Investor[] = [];
 
 	async create(data: CreateInvestorInput): Promise<Investor> {
-		const newInvestor = {
+		const newInvestor: Investor = {
 			id: crypto.randomUUID(),
-			...data,
+			email: data.email,
+			password_hash: data.password_hash,
 		};
 		this.investors.push(newInvestor);
 		return newInvestor;
@@ -21,6 +22,6 @@ export class InMemoryInvestorsRepository implements InvestorsRepository {
 		const investor = this.investors.find(
 			(investor) => investor.email === email,
 		);
-		return investor || null;
+		return investor ?? null;
 	}
 }

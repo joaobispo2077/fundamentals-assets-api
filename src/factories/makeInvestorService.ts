@@ -1,10 +1,9 @@
-import { InMemoryInvestorsRepository } from '@src/repositories/in-memory/InMemoryInvestorsRepository';
+import { singletonInMemoryInvestorsRepository } from '@src/repositories/in-memory';
 import { CreateInvestorService } from '@src/services/investors/createInvestorService';
 
 export const makeInvestorService = () => {
-	const inMemoryInvestorRepository = new InMemoryInvestorsRepository();
 	const createInvestorService = new CreateInvestorService(
-		inMemoryInvestorRepository,
+		singletonInMemoryInvestorsRepository,
 	);
 
 	return createInvestorService;

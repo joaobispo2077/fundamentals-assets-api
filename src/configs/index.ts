@@ -1,7 +1,13 @@
 import 'dotenv/config';
 import { z } from 'zod';
+import crypto from 'node:crypto';
 
 const configSchema = z.object({
+	COOKIE_REFRESH_TOKEN_NAME: z
+		.string()
+		.default('refreshToken@fundamentals-assets'),
+	JWT_SECRET: z.string().default(crypto.randomBytes(32).toString('hex')),
+	JWT_EXPIRES_IN: z.string().default('10m'),
 	SWAGGER_HOST: z.string().default('localhost:3333'),
 	SALT_ROUND: z.coerce.number().default(12),
 	PORT: z.coerce.number().default(3333),

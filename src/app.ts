@@ -8,8 +8,12 @@ import fastifySwagger, { SwaggerOptions } from '@fastify/swagger';
 import fastifySwaggerUi, { FastifySwaggerUiOptions } from '@fastify/swagger-ui';
 import pkg from '../package.json';
 import { setupRoutes } from './routes';
+import fastifyJwt from '@fastify/jwt';
+import fastifyCookie from '@fastify/cookie';
 
-const app = fastify();
+const app = fastify({
+	logger: true,
+});
 
 const swaggerOptions: SwaggerOptions = {
 	swagger: {
@@ -30,11 +34,24 @@ const swaggerUiOptions: FastifySwaggerUiOptions = {
 	routePrefix: '/docs',
 };
 
+app.register(fastifyJwt, {
+	secret: configs.JWT_SECRET,
+	cookie: {
+		cookieName: configs.COOKIE_REFRESH_TOKEN_NAME,
+		signed: false,
+	},
+	sign: {
+		expiresIn: configs.JWT_EXPIRES_IN,
+	},
+});
+app.register(fastifyCookie);
+
 app.register(fastifySwagger, swaggerOptions);
 app.register(fastifySwaggerUi, swaggerUiOptions);
 app.register(setupRoutes);
 
 app.setErrorHandler((error, _request, reply) => {
+	console.error(error);
 	if (error instanceof ZodError) {
 		return reply
 			.status(422)
@@ -49,6 +66,7 @@ app.setErrorHandler((error, _request, reply) => {
 		console.error(error);
 	} else {
 		// TODO: Here we should log to an external tool like DataDog/NewRelic/Sentry
+		console.error(error);
 	}
 
 	return reply.status(500).send({ message: 'Internal server error' });

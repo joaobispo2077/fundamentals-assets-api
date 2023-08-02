@@ -16,6 +16,5 @@ export const createInvestorController = async (
 	const createInvestorService = makeInvestorService();
 
 	const { investor } = await createInvestorService.execute({ email, password });
-
-	return reply.status(201).send(investor);
+	return reply.status(201).send(JSON.stringify(investor));
 };
