@@ -15,6 +15,7 @@ const configSchema = z.object({
 		.enum(['development', 'test', 'production'])
 		.default('development'),
 	LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('debug'),
+	isProduction: z.boolean().default(false),
 });
 
 const _configs = configSchema.safeParse(process.env);
@@ -26,4 +27,5 @@ if (!_configs.success) {
 
 export const configs = {
 	..._configs.data,
+	isProduction: _configs.data.NODE_ENV === 'production',
 };

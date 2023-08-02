@@ -2,8 +2,18 @@ import pino from 'pino';
 import { configs } from '@src/configs';
 import { LogData, Logger } from '../ports/logger';
 
+const transport = configs.isProduction
+	? undefined
+	: {
+			target: 'pino-pretty',
+			options: {
+				colorize: true,
+			},
+	  };
+
 const pinoLogger = pino({
 	level: configs.LOG_LEVEL,
+	transport,
 });
 
 const parseLoggerInputToPinoFormat = <T>({

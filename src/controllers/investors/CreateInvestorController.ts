@@ -1,4 +1,5 @@
 import { makeInvestorService } from '@src/factories/makeInvestorService';
+import { logger } from '@src/shared/utils/logger';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
@@ -16,5 +17,8 @@ export const createInvestorController = async (
 	const createInvestorService = makeInvestorService();
 
 	const { investor } = await createInvestorService.execute({ email, password });
+	logger.info({
+		message: `Investor ${email} created`,
+	});
 	return reply.status(201).send(JSON.stringify(investor));
 };
