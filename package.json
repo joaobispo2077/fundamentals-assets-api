@@ -24,7 +24,7 @@
 		"prepare": "husky install",
 		"dev": "tsx watch src/server.ts",
 		"lint:fix": "eslint ./src ./tests --ext .ts --fix",
-		"style:fix": "prettier --write src/**/*.ts test/**/*.ts",
+		"style:fix": "prettier --write src/**/*.ts tests/**/*.ts",
 		"hook:commit": "lint-staged",
 		"test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
 		"test:verbose": "jest --passWithNoTests --runInBand",
