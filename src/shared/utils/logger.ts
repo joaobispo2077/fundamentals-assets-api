@@ -26,35 +26,34 @@ const parseLoggerInputToPinoFormat = <T>({
 	err: error,
 });
 
+// REFACTOR code below to accept message or LogData<T>
+
+const handleLogMessage = <T>(
+	log: LogData<T> | string,
+	level: typeof configs.LOG_LEVEL,
+) => {
+	if (log instanceof String) {
+		return parseLoggerInputToPinoFormat({
+			type: level,
+			message: log as string,
+		});
+	}
+
+	return parseLoggerInputToPinoFormat({
+		type: level,
+		...(log as LogData<T>),
+	});
+};
+
 const logger: Logger = {
-	debug: <T>(log: LogData<T>) =>
-		pinoLogger.debug(
-			parseLoggerInputToPinoFormat({
-				type: 'debug',
-				...log,
-			}),
-		),
-	info: <T>(log: LogData<T>) =>
-		pinoLogger.info(
-			parseLoggerInputToPinoFormat({
-				type: 'info',
-				...log,
-			}),
-		),
-	warn: <T>(log: LogData<T>) =>
-		pinoLogger.warn(
-			parseLoggerInputToPinoFormat({
-				type: 'warn',
-				...log,
-			}),
-		),
-	error: <T>(log: LogData<T>) =>
-		pinoLogger.error(
-			parseLoggerInputToPinoFormat({
-				type: 'error',
-				...log,
-			}),
-		),
+	debug: <T>(log: LogData<T> | string) =>
+		pinoLogger.debug(handleLogMessage(log, 'debug')),
+	info: <T>(log: LogData<T> | string) =>
+		pinoLogger.info(handleLogMessage(log, 'info')),
+	warn: <T>(log: LogData<T> | string) =>
+		pinoLogger.warn(handleLogMessage(log, 'warn')),
+	error: <T>(log: LogData<T> | string) =>
+		pinoLogger.error(handleLogMessage(log, 'error')),
 };
 
 export { logger };

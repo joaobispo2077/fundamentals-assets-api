@@ -12,7 +12,7 @@ export type LogData<T> = {
 	  }
 );
 
-export type LogMethod = <T>(log: LogData<T>) => void;
+export type LogMethod = <T>(log: LogData<T> | string) => void;
 
 export type Logger = {
 	debug: LogMethod;
